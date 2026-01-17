@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickKart - Contact Us</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">
+                <i class="fas fa-shopping-bag"></i>
+                <span>QuickKart</span>
+            </a>
+        </div>
+        
+        <!-- Category Dropdown -->
+        <div class="nav-categories">
+            <button class="category-btn">
+                Categories <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="category-dropdown">
+                <a href="products.html?category=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                <a href="products.html?category=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                <a href="products.html?category=accessories"><i class="fas fa-headphones"></i> Accessories</a>
+                <a href="products.html?category=home"><i class="fas fa-home"></i> Home & Living</a>
+                <a href="products.html"><i class="fas fa-th"></i> All Products</a>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="nav-search">
+            <input type="text" id="navbar-search" placeholder="Search products..." onkeypress="handleSearch(event)">
+            <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+
+        <!-- Right Side Icons -->
+        <div class="nav-icons">
+            <a href="#" class="nav-icon" title="Wishlist" onclick="showWishlist(); return false;">
+                <i class="far fa-heart"></i>
+                <span class="icon-badge" id="wishlist-count">0</span>
+            </a>
+            <a href="cart.html" class="nav-icon" title="Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="icon-badge" id="cart-count">0</span>
+            </a>
+            <a href="#" class="nav-icon user-icon" title="My Account" onclick="showToast('Please login to access your account'); return false;">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="page-content" style="padding: 100px 5% 60px; min-height: 100vh;">
+        <h1 class="section-title">Contact Us</h1>
+        <p class="section-subtitle">We'd love to hear from you</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto;">
+            
+            <!-- Contact Form -->
+            <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: var(--shadow);">
+                <h2 style="color: var(--secondary-color); margin-bottom: 25px;">Send us a Message</h2>
+                <form onsubmit="submitContactForm(event)">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Your Name</label>
+                        <input type="text" placeholder="Enter your name" required style="width: 100%; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Email Address</label>
+                        <input type="email" placeholder="Enter your email" required style="width: 100%; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Subject</label>
+                        <select style="width: 100%; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem;">
+                            <option>General Inquiry</option>
+                            <option>Order Status</option>
+                            <option>Returns & Refunds</option>
+                            <option>Technical Support</option>
+                            <option>Bulk Orders</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 500;">Message</label>
+                        <textarea placeholder="Write your message here..." rows="5" required style="width: 100%; padding: 12px 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 20px;">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 20px;">Contact Information</h3>
+                    <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px;">
+                        <div style="width: 50px; height: 50px; background: rgba(255, 107, 53, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary-color); font-size: 1.2rem;"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Address</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">QuickKart E-Commerce Pvt Ltd<br>123 Business Park, Sector 15<br>Mumbai, Maharashtra 400001</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px;">
+                        <div style="width: 50px; height: 50px; background: rgba(255, 107, 53, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-phone" style="color: var(--primary-color); font-size: 1.2rem;"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Phone</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">+91 98765 43210<br>+91 91234 56789</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 15px;">
+                        <div style="width: 50px; height: 50px; background: rgba(255, 107, 53, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-envelope" style="color: var(--primary-color); font-size: 1.2rem;"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Email</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">support@quickkart.com<br>info@quickkart.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 30px; border-radius: 15px; box-shadow: var(--shadow);">
+                    <h3 style="color: var(--secondary-color); margin-bottom: 20px;">Business Hours</h3>
+                    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+                        <span>Monday - Friday</span>
+                        <span style="color: var(--primary-color); font-weight: 500;">9:00 AM - 8:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee;">
+                        <span>Saturday</span>
+                        <span style="color: var(--primary-color); font-weight: 500;">10:00 AM - 6:00 PM</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 10px 0;">
+                        <span>Sunday</span>
+                        <span style="color: var(--primary-color); font-weight: 500;">Closed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>QuickKart</span>
+                </div>
+                <p>Your one-stop destination for all shopping needs. Quality products, best prices, fast delivery.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping Info</a></li>
+                    <li><a href="returns.html">Returns Policy</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jaunpur, India</li>
+                    <li><i class="fas fa-phone"></i> 8081448551, 9140392258</li>
+                    <li><i class="fas fa-envelope"></i> pandeysp1981@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 QuickKart. All rights reserved. | Founded in December 2025 | Made with <i class="fas fa-heart"></i> in India</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function submitContactForm(event) {
+            event.preventDefault();
+            alert("Thank you for your message! We'll get back to you within 24 hours.");
+            event.target.reset();
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickKart - Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="nav-brand">
+            <a href="index.html">
+                <i class="fas fa-shopping-bag"></i>
+                <span>QuickKart</span>
+            </a>
+        </div>
+
+        <!-- Category Dropdown -->
+        <div class="nav-categories">
+            <button class="category-btn hover-lift">
+                Categories <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="category-dropdown glass-strong">
+                <a href="products.html?category=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                <a href="products.html?category=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                <a href="products.html?category=accessories"><i class="fas fa-headphones"></i> Accessories</a>
+                <a href="products.html?category=home"><i class="fas fa-home"></i> Home & Living</a>
+                <a href="products.html"><i class="fas fa-th"></i> All Products</a>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="nav-search search-container">
+            <input type="text" id="navbar-search" placeholder="Search products..." oninput="handleSearchInput(event)" onkeydown="handleSearchKeydown(event)">
+            <button onclick="performSearch()" class="hover-glow"><i class="fas fa-search"></i></button>
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html" class="hover-text-glow">Home</a></li>
+            <li><a href="products.html" class="hover-text-glow">Products</a></li>
+            <li><a href="about.html" class="hover-text-glow">About</a></li>
+            <li><a href="contact.html" class="hover-text-glow">Contact</a></li>
+        </ul>
+
+        <!-- Right Side Icons -->
+        <div class="nav-icons">
+            <a href="#" class="nav-icon" title="Wishlist" onclick="showWishlist(); return false;">
+                <i class="far fa-heart"></i>
+                <span class="icon-badge" id="wishlist-count">0</span>
+            </a>
+            <a href="cart.html" class="nav-icon" title="Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="icon-badge" id="cart-count">0</span>
+            </a>
+            <a href="#" class="nav-icon user-icon" title="My Account" onclick="showToast('Please login to access your account'); return false;">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-page" style="padding: 100px 5% 60px; min-height: 100vh;">
+        <h1 class="section-title">Shopping Cart</h1>
+        <p class="section-subtitle">Review your items before checkout</p>
+
+        <!-- Empty Cart Message -->
+        <div id="empty-cart" style="display: none; text-align: center; padding: 60px 20px;">
+            <i class="fas fa-shopping-cart" style="font-size: 4rem; color: #ddd; margin-bottom: 20px;"></i>
+            <h2 style="color: #636e72; margin-bottom: 15px;">Your cart is empty</h2>
+            <p style="color: #999; margin-bottom: 30px;">Looks like you haven't added any items to your cart yet.</p>
+            <a href="products.html" class="btn btn-primary">Start Shopping</a>
+        </div>
+
+        <!-- Cart Items -->
+        <div id="cart-items" style="max-width: 900px; margin: 0 auto;">
+            <!-- Cart items loaded via JavaScript -->
+        </div>
+
+        <!-- Cart Total -->
+        <div id="total-price" style="max-width: 900px; margin: 30px auto;"></div>
+
+        <!-- Continue Shopping -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="products.html" class="btn" style="background: #ddd; color: #333;">
+                <i class="fas fa-arrow-left"></i> Continue Shopping
+            </a>
+        </div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="modal-overlay" onclick="closeCheckoutModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-credit-card"></i> Checkout</h2>
+                <button class="close-btn" onclick="closeCheckoutModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="checkout-form">
+                    <div class="checkout-section">
+                        <h3>Shipping Address</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="full-name">Full Name *</label>
+                                <input type="text" id="full-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <textarea id="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip">ZIP Code *</label>
+                                <input type="text" id="zip" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="state">State *</label>
+                                <input type="text" id="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Country *</label>
+                                <input type="text" id="country" value="India" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3>Payment Details</h3>
+                        <div class="form-group">
+                            <label for="card-number">Card Number *</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date *</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV *</label>
+                                <input type="text" id="cvv" placeholder="123" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="card-name">Name on Card *</label>
+                            <input type="text" id="card-name" required>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3>Order Summary</h3>
+                        <div id="checkout-summary"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                        <i class="fas fa-lock"></i> Complete Purchase
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>QuickKart</span>
+                </div>
+                <p>Your one-stop destination for all shopping needs. Quality products, best prices, fast delivery.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Info</a></li>
+                    <li><a href="#">Returns Policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jaunpur, India</li>
+                    <li><i class="fas fa-phone"></i> +91 8081448551, +91 9140392258</li>
+                    <li><i class="fas fa-envelope"></i> pandeysp1981@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 QuickKart. All rights reserved. | Founded in December 2025 | Made with <i class="fas fa-heart"></i> in India</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+

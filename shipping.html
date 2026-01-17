@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickKart - Shipping Information</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html">
+                <i class="fas fa-shopping-bag"></i>
+                <span>QuickKart</span>
+            </a>
+        </div>
+        
+        <!-- Category Dropdown -->
+        <div class="nav-categories">
+            <button class="category-btn">
+                Categories <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="category-dropdown">
+                <a href="products.html?category=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                <a href="products.html?category=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                <a href="products.html?category=accessories"><i class="fas fa-headphones"></i> Accessories</a>
+                <a href="products.html?category=home"><i class="fas fa-home"></i> Home & Living</a>
+                <a href="products.html"><i class="fas fa-th"></i> All Products</a>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="nav-search">
+            <input type="text" id="navbar-search" placeholder="Search products..." onkeypress="handleSearch(event)">
+            <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <!-- Right Side Icons -->
+        <div class="nav-icons">
+            <a href="#" class="nav-icon" title="Wishlist" onclick="showWishlist(); return false;">
+                <i class="far fa-heart"></i>
+                <span class="icon-badge" id="wishlist-count">0</span>
+            </a>
+            <a href="cart.html" class="nav-icon" title="Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="icon-badge" id="cart-count">0</span>
+            </a>
+            <a href="#" class="nav-icon user-icon" title="My Account" onclick="showToast('Please login to access your account'); return false;">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Shipping Info Section -->
+    <section class="page-content" style="padding: 100px 5% 60px; min-height: 100vh;">
+        <h1 class="section-title">Shipping Information</h1>
+        <p class="section-subtitle">Everything you need to know about delivery</p>
+
+        <div style="max-width: 900px; margin: 0 auto;">
+            
+            <!-- Delivery Times -->
+            <div style="background: white; padding: 35px; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 30px;">
+                <h2 style="color: var(--primary-color); margin-bottom: 25px;"><i class="fas fa-clock" style="margin-right: 10px;"></i> Delivery Timeframes</h2>
+                <div style="display: grid; gap: 20px;">
+                    <div style="display: flex; align-items: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                            <i class="fas fa-bolt" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Metro Cities</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Mumbai, Delhi, Bangalore, Chennai, Hyderabad, Kolkata</p>
+                            <p style="color: var(--primary-color); font-weight: 600;">1-2 business days</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: var(--secondary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                            <i class="fas fa-city" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Tier 2 Cities</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Pune, Ahmedabad, Jaipur, Lucknow, Kochi, Indore</p>
+                            <p style="color: var(--primary-color); font-weight: 600;">2-3 business days</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                        <div style="width: 60px; height: 60px; background: #636e72; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px;">
+                            <i class="fas fa-road" style="color: white; font-size: 1.5rem;"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Other Areas</h4>
+                            <p style="color: var(--text-light); font-size: 0.9rem;">Tier 3 cities, towns, and villages</p>
+                            <p style="color: var(--primary-color); font-weight: 600;">5-7 business days</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Charges -->
+            <div style="background: white; padding: 35px; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 30px;">
+                <h2 style="color: var(--primary-color); margin-bottom: 25px;"><i class="fas fa-tag" style="margin-right: 10px;"></i> Shipping Charges</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="background: #f8f9fa;">
+                        <th style="padding: 15px; text-align: left; border-bottom: 2px solid #eee;">Order Value</th>
+                        <th style="padding: 15px; text-align: left; border-bottom: 2px solid #eee;">Shipping Cost</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">Below ₹499</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee; color: var(--primary-color); font-weight: 600;">₹49</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">₹499 - ₹999</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee; color: var(--primary-color); font-weight: 600;">₹29</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee;">₹999 and above</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #eee; color: #00b894; font-weight: 600;">FREE</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Tracking -->
+            <div style="background: white; padding: 35px; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 30px;">
+                <h2 style="color: var(--primary-color); margin-bottom: 25px;"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> Track Your Order</h2>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 20px;">
+                    Once your order is shipped, you'll receive an SMS and email with your tracking number. You can also track your order by:
+                </p>
+                <ol style="color: var(--text-light); line-height: 2; padding-left: 20px;">
+                    <li>Logging into your QuickKart account</li>
+                    <li>Going to "My Orders" section</li>
+                    <li>Clicking on the specific order to view tracking details</li>
+                </ol>
+            </div>
+
+            <!-- Important Notes -->
+            <div style="background: white; padding: 35px; border-radius: 15px; box-shadow: var(--shadow); margin-bottom: 30px;">
+                <h2 style="color: var(--primary-color); margin-bottom: 25px;"><i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i> Important Notes</h2>
+                <ul style="color: var(--text-light); line-height: 2; padding-left: 20px;">
+                    <li>Orders placed after 6 PM will be processed the next business day</li>
+                    <li>Delivery times may be longer during sale periods or festive seasons</li>
+                    <li>We do not deliver on Sundays and public holidays</li>
+                    <li>Please ensure someone is available to receive the delivery</li>
+                    <li>Incorrect addresses may result in delayed delivery or return to sender</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div style="background: linear-gradient(135deg, var(--primary-color), #ff8c5a); padding: 30px; border-radius: 15px; color: white; text-align: center;">
+                <h3 style="margin-bottom: 10px;">Questions about shipping?</h3>
+                <p style="margin-bottom: 20px; opacity: 0.9;">Our support team is here to help</p>
+                <a href="contact.html" class="btn" style="background: white; color: var(--primary-color);">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-brand">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>QuickKart</span>
+                </div>
+                <p>Your one-stop destination for all shopping needs. Quality products, best prices, fast delivery.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="shipping.html">Shipping Info</a></li>
+                    <li><a href="returns.html">Returns Policy</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jaunpur, India</li>
+                    <li><i class="fas fa-phone"></i> 8081448551, 9140392258</li>
+                    <li><i class="fas fa-envelope"></i> pandeysp1981@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 QuickKart. All rights reserved. | Founded in December 2025 | Made with <i class="fas fa-heart"></i> in India</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+

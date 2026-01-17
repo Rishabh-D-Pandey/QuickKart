@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickKart - Shop Smart, Shop Fast</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>QuickKart</span>
+            </div>
+            <div class="loading-spinner"></div>
+            <p>Loading amazing deals...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="nav-brand">
+            <a href="index.html">
+                <i class="fas fa-shopping-bag"></i>
+                <span>QuickKart</span>
+            </a>
+        </div>
+
+        <!-- Category Dropdown -->
+        <div class="nav-categories">
+            <button class="category-btn hover-lift">
+                Categories <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="category-dropdown glass-strong">
+                <a href="products.html?category=electronics"><i class="fas fa-laptop"></i> Electronics</a>
+                <a href="products.html?category=fashion"><i class="fas fa-tshirt"></i> Fashion</a>
+                <a href="products.html?category=accessories"><i class="fas fa-headphones"></i> Accessories</a>
+                <a href="products.html?category=home"><i class="fas fa-home"></i> Home & Living</a>
+                <a href="products.html"><i class="fas fa-th"></i> All Products</a>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="nav-search search-container">
+            <input type="text" id="navbar-search" placeholder="Search products..." oninput="handleSearchInput(event)" onkeydown="handleSearchKeydown(event)">
+            <button onclick="performSearch()" class="hover-glow"><i class="fas fa-search"></i></button>
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html" class="active hover-text-glow">Home</a></li>
+            <li><a href="products.html" class="hover-text-glow">Products</a></li>
+            <li><a href="about.html" class="hover-text-glow">About</a></li>
+            <li><a href="contact.html" class="hover-text-glow">Contact</a></li>
+        </ul>
+
+        <!-- Right Side Icons -->
+        <div class="nav-icons">
+            <a href="#" class="nav-icon" title="Wishlist" onclick="showWishlist(); return false;">
+                <i class="far fa-heart"></i>
+                <span class="icon-badge" id="wishlist-count">0</span>
+            </a>
+            <a href="cart.html" class="nav-icon" title="Cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="icon-badge" id="cart-count">0</span>
+            </a>
+            <a href="#" class="nav-icon user-icon" title="My Account" onclick="showToast('Please login to access your account'); return false;">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <div class="hero-content slide-in-left">
+            <h1 class="gradient-text">Shop Smart. Shop Fast.</h1>
+            <p>Discover amazing products at unbeatable prices. Fast delivery across India.</p>
+            <div class="hero-buttons">
+                <a href="products.html" class="btn btn-primary liquid-btn magnetic">Shop Now</a>
+                <a href="#categories" class="btn btn-secondary liquid-btn magnetic">Browse Categories</a>
+            </div>
+            <div class="hero-features">
+                <div class="feature-badge hover-lift">
+                    <i class="fas fa-truck"></i>
+                    <span>Free Shipping</span>
+                </div>
+                <div class="feature-badge hover-lift">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Payment</span>
+                </div>
+                <div class="feature-badge hover-lift">
+                    <i class="fas fa-undo"></i>
+                    <span>Easy Returns</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image slide-in-right">
+            <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600" alt="Shopping" class="hover-rotate">
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products fade-in" id="featured">
+        <h2 class="section-title gradient-text-secondary">Featured Products</h2>
+        <p class="section-subtitle">Handpicked favorites from each category</p>
+        <div class="product-grid" id="featured-products">
+            <!-- 4 Featured Products (one from each category) loaded via JavaScript -->
+        </div>
+        <div class="view-all">
+            <a href="products.html" class="btn btn-primary liquid-btn magnetic">View All Products</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories slide-in-left" id="categories">
+        <h2 class="section-title gradient-text-secondary">Shop by Category</h2>
+        <p class="section-subtitle">Explore our wide range of products</p>
+        <div class="category-grid">
+            <div class="category-card hover-lift hover-morph" onclick="filterProducts('electronics')">
+                <div class="category-icon shadow-glow">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3>Electronics</h3>
+                <p>Latest gadgets & devices</p>
+            </div>
+            <div class="category-card hover-lift hover-morph" onclick="filterProducts('fashion')">
+                <div class="category-icon shadow-glow">
+                    <i class="fas fa-tshirt"></i>
+                </div>
+                <h3>Fashion</h3>
+                <p>Trendy clothing & accessories</p>
+            </div>
+            <div class="category-card hover-lift hover-morph" onclick="filterProducts('accessories')">
+                <div class="category-icon shadow-glow">
+                    <i class="fas fa-headphones"></i>
+                </div>
+                <h3>Accessories</h3>
+                <p>Premium accessories</p>
+            </div>
+            <div class="category-card hover-lift hover-morph" onclick="filterProducts('home')">
+                <div class="category-icon shadow-glow">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3>Home & Living</h3>
+                <p>Home essentials & decor</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-us slide-in-right">
+        <h2 class="section-title gradient-text-secondary">Why Choose QuickKart?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card hover-lift shadow-layered">
+                <div class="benefit-icon">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3>Fast Delivery</h3>
+                <p>Get your orders delivered within 2-3 days anywhere in India.</p>
+            </div>
+            <div class="benefit-card hover-lift shadow-layered">
+                <div class="benefit-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3>Best Prices</h3>
+                <p>Competitive pricing with regular discounts and offers.</p>
+            </div>
+            <div class="benefit-card hover-lift shadow-layered">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Quality Assured</h3>
+                <p>All products are quality checked before shipping.</p>
+            </div>
+            <div class="benefit-card hover-lift shadow-layered">
+                <div class="benefit-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Our customer support team is always here to help you.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Amazing shopping experience! Fast delivery and great products. Will definitely shop again."</p>
+                <div class="customer-info">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Customer">
+                    <div>
+                        <h4>John Smith</h4>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"Best prices in the market! Saved a lot on my electronics purchase. Highly recommended!"</p>
+                <div class="customer-info">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Customer">
+                    <div>
+                        <h4>Sarah Johnson</h4>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Customer service is top-notch! Had an issue and they resolved it within hours. Love QuickKart!"</p>
+                <div class="customer-info">
+                    <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Customer">
+                    <div>
+                        <h4>Mike Wilson</h4>
+                        <span>Verified Buyer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter glass-strong fade-in">
+        <div class="newsletter-content">
+            <h2 class="gradient-text">Subscribe to Our Newsletter</h2>
+            <p>Get exclusive deals, discounts, and updates straight to your inbox!</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary liquid-btn magnetic">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer glass">
+        <div class="footer-content">
+            <div class="footer-section slide-in-left">
+                <div class="footer-brand">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>QuickKart</span>
+                </div>
+                <p>Your one-stop destination for all shopping needs. Quality products, best prices, fast delivery.</p>
+                <div class="social-links">
+                    <a href="#" class="hover-glow"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover-glow"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover-glow"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover-glow"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section slide-in-left">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html" class="hover-text-glow">Home</a></li>
+                    <li><a href="products.html" class="hover-text-glow">Products</a></li>
+                    <li><a href="cart.html" class="hover-text-glow">Cart</a></li>
+                    <li><a href="about.html" class="hover-text-glow">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section slide-in-right">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="contact.html" class="hover-text-glow">Contact Us</a></li>
+                    <li><a href="shipping.html" class="hover-text-glow">Shipping Info</a></li>
+                    <li><a href="returns.html" class="hover-text-glow">Returns Policy</a></li>
+                    <li><a href="faq.html" class="hover-text-glow">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section slide-in-right">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jaunpur, India</li>
+                    <li><i class="fas fa-phone"></i> +91 8081448551, +91 9140392258</li>
+                    <li><i class="fas fa-envelope"></i> pandeysp1981@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 QuickKart. All rights reserved. | Founded in December 2025 | Made with <i class="fas fa-heart hover-glow"></i> in India</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab-main" id="fab-main">
+            <i class="fas fa-plus"></i>
+        </button>
+        <div class="fab-menu">
+            <button class="fab-item" onclick="window.location.href='cart.html'">
+                <i class="fas fa-shopping-cart"></i>
+            </button>
+            <button class="fab-item" onclick="window.location.href='products.html'">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="fab-item" onclick="window.location.href='contact.html'">
+                <i class="fas fa-envelope"></i>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+
